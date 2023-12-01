@@ -46,6 +46,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+
+			signUp: async (email, password, name, lastName, userName, country, phone, address, date, isActive) => {
+				try{
+
+				const response = await fetch("https://laughing-goggles-q7q956p5vvrp36679-3001.app.github.dev/api/sign_up", {
+					method: "POST",
+					body: JSON.stringify({email: email, password: password, name: name, lastName: lastName, userName: userName, country: country, phone: phone, address: address, date: date, isActive: isActive}),
+					headers: {
+						"Content-type" : "application/json"
+					}
+				})
+
+				const data = await response.json()
+				console.log(data)
+
+				}catch(error){
+					console.log(error)
+				}
+
 			}
 		}
 	};
