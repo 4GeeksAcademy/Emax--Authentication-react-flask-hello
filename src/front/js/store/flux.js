@@ -49,24 +49,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			signUp: async (email, password, name, lastName, userName, country, phone, address, date, isActive) => {
-				try{
-
-				const response = await fetch("https://laughing-goggles-q7q956p5vvrp36679-3001.app.github.dev/api/sign_up", {
-					method: "POST",
-					body: JSON.stringify({email: email, password: password, name: name, lastName: lastName, userName: userName, country: country, phone: phone, address: address, date: date, isActive: isActive}),
-					headers: {
-						"Content-type" : "application/json"
+				try {
+					const response = await fetch("https://laughing-goggles-q7q956p5vvrp36679-3001.app.github.dev/api/sign_up", {
+						method: "POST",
+						body: JSON.stringify({ email, password, name, lastName, userName, country, phone, address, date, isActive }),
+						headers: {
+							"Content-type": "application/json"
+						}
+					});
+			
+					if (response.ok) {
+						const data = await response.json();
+						console.log("User created successfully:", data);
+			
+					} else {
+						
+						const errorData = await response.json();
+						console.error("Error creating user:", errorData);
+						
 					}
-				})
-
-				const data = await response.json()
-				console.log(data)
-
-				}catch(error){
-					console.log(error)
+				} catch (error) {
+					console.error("Error:", error);
+					
 				}
-
 			}
+			
 		}
 	};
 };

@@ -85,7 +85,7 @@ export const Home = () => {
 				</div>
 				<div className="col-12">
 					<div className="form-check">
-					<input className="form-check-input" type="checkbox" id="gridCheck" value={isActive} onChange={(e)=> setIsActive(e.target.value)}/>
+					<input className="form-check-input" type="checkbox" id="gridCheck" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} />
 					<label className="form-check-label" for="gridCheck">
 						Is active
 					</label>
