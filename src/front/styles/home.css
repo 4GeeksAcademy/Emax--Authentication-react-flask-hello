@@ -1,15 +1,67 @@
-.form-container{
-    background-color: #24303c;
-    color: #1daf88;
+body {
+    background-color: #939fb0;
+}
+
+.container-signUp {
+    display: flex;
+    width: 90%;
+    height: 70%;
+    margin: auto;
+}
+
+.left {
+    background-color: #fff;
+    width: 100%;
+}
+
+.title-l {
+    color: #6fe1cb;
+    margin-top: 50px;
+}
+
+.right {
+    background-color: #34445b;
+    width: 100%;
+    padding: 20px;
+}
+
+.form-r {
+    width: 80%;
+    margin: auto;
+}
+
+.title-r {
+    color: #6fe1cb;
+    text-align: center;
     padding: 10px;
+    margin: 10px 0px;
+    border-bottom: solid #57697b 2px;
 }
-.inputs{
-    background-color:#24303c ;
+
+.inputs {
+    border: none;
 }
-.inp-date{
+
+.labels {
+    color: #6fe1cb;
+}
+
+.inputs::placeholder {
     color: #1daf88;
 }
-.singup{
-    background-color:#1daf88 ;
-    color: #fff;
+
+.singup:hover {
+    background-color: #1daf88;
+}
+
+.butons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.body-l {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

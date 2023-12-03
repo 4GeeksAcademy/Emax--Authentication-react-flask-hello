@@ -8,8 +8,7 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
-	const [name, setName] = useState("")
-	const [lastName, setLastName] = useState("")
+	const [fullName, setFullName] = useState("")
 	const [userName, setUserName] = useState("")
 	const [country, setCountry] = useState("")
 	const [phone, setPhone] = useState("")
@@ -19,14 +18,13 @@ export const Home = () => {
 
 	const navigate = useNavigate()
 
-	const handlerSignUp= (e) => {
+	const handlerSignUp = (e) => {
 		e.preventDefault()
-		actions.signUp(email, password, name, lastName, userName, country, phone, address, date, isActive)
+		actions.signUp(email, password, fullName, userName, country, phone, address, date, isActive)
 		navigate("/demo")
 		setEmail("")
 		setPassword("")
-		setName("")
-		setLastName("")
+		setFullName("")
 		setUserName("")
 		setCountry("")
 		setPhone("")
@@ -36,68 +34,95 @@ export const Home = () => {
 	}
 
 	return (
-		<div className="container mt-5">
 
-			<div className="form-container">
-				
-				<form className="row g-3">
-				<div className="col-md-6">
-					<label for="inputEmail4" className="form-label">Email:</label>
-					<input type="email" className="form-control inputs" id="inputEmail4" value={email} onChange={(e)=> setEmail(e.target.value)}/>
-				</div>
-				<div className="col-md-6">
-					<label for="inputPassword4" className="form-label">Password:</label>
-					<input type="password" className="form-control inputs" id="inputPassword4" value={password} onChange={(e)=> setPassword(e.target.value)}/>
-				</div>
-				<div className="col-4">
-					<label for="inputAddress" className="form-label">Name:</label>
-					<input type="text" className="form-control inputs" id="inputAddress" value={name} onChange={(e)=> setName(e.target.value)}/>
-				</div>
-				<div className="col-4">
-					<label for="inputAddress2" className="form-label">Last Name:</label>
-					<input type="text" className="form-control inputs" id="inputAddress2" value={lastName} onChange={(e)=> setLastName(e.target.value)}/>
-				</div>
+		<>
 
-				<div className="col-md-4">
-					<label for="inputCity" className="form-label">User Name:</label>
-					<input type="text" className="form-control inputs" id="inputCity" value={userName} onChange={(e)=> setUserName(e.target.value)}/>
-				</div>
+			<div className="container-signUp mt-5">
 
-				<div className="col-md-6">
-					<label for="inputCity" className="form-label">Country:</label>
-					<input type="text" className="form-control inputs" id="inputCity" value={country} onChange={(e)=> setCountry(e.target.value)}/>
-				</div>
+				<div className="left">
 
-				<div className="col-md-6">
-					<label for="inputCity" className="form-label">Phone:</label>
-					<input type="number" className="form-control inputs" id="inputCity" value={phone} onChange={(e)=> setPhone(e.target.value)}/>
-				</div>
+					<h2><i className="fa-solid fa-earth-americas fa-xl mt-5 mx-3" style={{ color: "#6fe1cb" }}></i></h2>
 
-				<div className="col-md-8">
-					<label for="inputCity" className="form-label">Address:</label>
-					<input type="text" className="form-control inputs" id="inputCity" value={address} onChange={(e)=> setAddress(e.target.value)}/>
-				</div>
+					<div className="body-l">
 
-				
-				<div className="col-md-4">
-					<label for="inputZip" className="form-label">Date:</label>
-					<input type="date" className="form-control inputs inp-date" id="inputZip" value={date} onChange={(e)=> setDate(e.target.value)}/>
-				</div>
-				<div className="col-12">
-					<div className="form-check">
-					<input className="form-check-input" type="checkbox" id="gridCheck" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} />
-					<label className="form-check-label" for="gridCheck">
-						Is active
-					</label>
+						<h3 className="title-l">Plan your activities and control your progress online </h3>
+
+						<img src="https://img.freepik.com/vector-premium/cohete-fuera-caja-lanzamiento-transbordador-espacial-al-cielo-expulsado-circulo-concepto-negocio-inicio-creativo-icono-cohete-ilustracion-vectorial-arte-papel_34950-476.jpg" alt="rochet img" />
+
 					</div>
+
 				</div>
-				<div className="col-12">
-					<button type="submit" className="btn singup" onClick={(e)=> handlerSignUp(e)}>Sign Up</button>
+
+				<div className="form-container right">
+
+					<h2 className="title-r">Create Account</h2>
+
+					<form className="row g-3 form-r">
+
+						<div className="col-md-12">
+							<label for="inputAddress" className="form-label labels">FULL NAME :</label>
+							<input type="text" className="form-control inputs" id="inputAddress" value={fullName} onChange={(e) => setFullName(e.target.value)} />
+						</div>
+
+						<div className="col-md-12">
+							<label for="inputCity" className="form-label labels">USER NAME :</label>
+							<input type="text" className="form-control inputs" id="inputCity" value={userName} onChange={(e) => setUserName(e.target.value)} />
+						</div>
+						<div className="col-md-12">
+							<label for="inputEmail4" className="form-label labels">E-MAIL :</label>
+							<input type="email" className="form-control inputs" id="inputEmail4" value={email} onChange={(e) => setEmail(e.target.value)} />
+
+						</div>
+						<div className="col-md-12">
+							<label for="inputPassword4" className="form-label labels">PASSWORD :</label>
+							<input type="password" className="form-control inputs" id="inputPassword4" value={password} onChange={(e) => setPassword(e.target.value)} />
+						</div>
+
+						<div className="col-md-12">
+							<label for="inputCity" className="form-label labels">COUNTRY :</label>
+							<input type="text" className="form-control inputs" id="inputCity" value={country} onChange={(e) => setCountry(e.target.value)} />
+						</div>
+
+						<div className="col-md-12">
+							<label for="inputCity" className="form-label labels">PHONE :</label>
+							<input type="number" className="form-control inputs" id="inputCity" value={phone} onChange={(e) => setPhone(e.target.value)} />
+						</div>
+
+						<div className="col-md-12">
+							<label for="inputCity" className="form-label labels">ADDRESS :</label>
+							<input type="text" className="form-control inputs" id="inputCity" value={address} onChange={(e) => setAddress(e.target.value)} />
+						</div>
+
+
+						<div className="col-md-4">
+							<label for="inputZip" className="form-label labels">DATE :</label>
+							<input type="date" className="form-control inputs inp-date" id="inputZip" value={date} onChange={(e) => setDate(e.target.value)} />
+						</div>
+
+						<div className="form-check mt-5">
+							<input className="form-check-input inputs" type="checkbox" value="" id="flexCheckDefault" />
+							<label className="form-check-label labels" for="flexCheckDefault">
+								Accept terms and conditions?
+							</label>
+						</div>
+
+						<div className="butons">
+
+							<div></div>
+
+							<div className="mb-4">
+
+								<button type="submit" className="btn btn-primary singup" onClick={(e) => handlerSignUp(e)}>Sign Up</button>
+
+							</div>
+
+						</div>
+					</form>
+
 				</div>
-				</form>
 
 			</div>
-		
-		</div>
+
+		</>
 	);
 };

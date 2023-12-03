@@ -6,8 +6,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(250), unique=False, nullable=False)
-    name = db.Column(db.String(100), unique=False, nullable=False)
-    last_name = db.Column(db.String(50), unique=False, nullable=False)
+    full_name = db.Column(db.String(100), unique=False, nullable=False)
     user_name = db.Column(db.String(50), unique=False, nullable=False)
     country = db.Column(db.String(50), unique=False, nullable=False)
     phone = db.Column(db.String(20), unique=False, nullable=False)
@@ -21,9 +20,8 @@ class User(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "name": self.name,
+            "full_name": self.full_name,
             "email": self.email,
-            "last_name": self.last_name,
             "user_name": self.user_name,
             "country": self.country,
             "phone": self.phone,

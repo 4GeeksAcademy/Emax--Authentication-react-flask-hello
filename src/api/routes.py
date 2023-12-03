@@ -22,7 +22,6 @@ def create_one_user():
     try:
         body = request.get_json()
 
-        # Validación y conversión de la fecha
         date = datetime.strptime(body["date"], "%Y-%m-%d")
     except (ValueError, KeyError):
         return jsonify({"error": "Invalid or missing date format. Please use YYYY-MM-DD."}), 400
@@ -31,8 +30,7 @@ def create_one_user():
 
     password_hash = bcrypt.generate_password_hash(raw_password).decode('utf-8')
     new_user = User(
-        name=body["name"],
-        last_name=body["last_name"],
+        full_name=body["full_name"],
         email=body["email"],
         password=password_hash,
         user_name=body["user_name"],
@@ -48,8 +46,7 @@ def create_one_user():
         db.session.commit()
 
         ok_to_share = {
-            "name": body["name"],
-            "last_name": body["last_name"],
+            "full_name": body["name"],
             "email": body["email"],
             "user_name": body["user_name"],
             "country": body["country"],
