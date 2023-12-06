@@ -12,7 +12,6 @@ class User(db.Model):
     phone = db.Column(db.String(20), unique=False, nullable=False)
     address = db.Column(db.String(150), unique=False, nullable=False)
     date = db.Column(db.Date, unique=False, nullable=False)
-    is_active = db.Column(db.Boolean, unique=False, nullable=False)
     
     def __repr__(self):
         return f'<User {self.email}>'
@@ -26,7 +25,6 @@ class User(db.Model):
             "country": self.country,
             "phone": self.phone,
             "address": self.address,
-            "date": self.date.strftime('%Y-%m-%d %H:%M:%S'),
-            "is_active": self.is_active
+            #"date": self.date.strftime('%Y-%m-%d %H:%M:%S'),
             # do not serialize the password, its a security breach
         }

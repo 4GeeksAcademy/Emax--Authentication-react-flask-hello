@@ -1,3 +1,4 @@
+const apiUrl = process.env.BACKEND_URL + "/api"
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -21,18 +22,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
-			getMessage: async () => {
-				try {
-					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
-					const data = await resp.json()
-					setStore({ message: data.message })
-					// don't forget to return something, that is how the async resolves
-					return data;
-				} catch (error) {
-					console.log("Error loading message from backend", error)
-				}
-			},
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
@@ -48,31 +37,52 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			},
 
-			signUp: async (email, password, fullName, userName, country, phone, address, date, isActive) => {
+			sign: async (newUser) => {
+				console.log(newUser);
+
 				try {
-					const response = await fetch(process.env.BACKEND_URL + "/sign_up", {
+					const response = await fetch(apiUrl + "/sign", {
 						method: "POST",
-						body: JSON.stringify({ email, password, fullName, userName, country, phone, address, date, isActive }),
+						body: JSON.stringify(newUser),
 						headers: {
-							"Content-type": "application/json"
+							"Content-Type": "application/json",
+							'access-control-allow-origin': "*"
 						}
 					});
 
-					if (response.ok) {
-						const data = await response.json();
-						console.log("User created successfully:", data);
-
-					} else {
-
-						const errorData = await response.json();
-						console.error("Error creating user:", errorData);
-
+					if (!response.ok) {
+						throw new Error("Error with the request");
 					}
-				} catch (error) {
-					console.error("Error:", error);
 
+					const data = await response.json();
+					alert("usuario registrado")
+					console.log("respuesta al intentar un new user:", data);
+
+					// Aquí podrías realizar alguna acción con los datos obtenidos, como actualizar el estado
+
+					// Ejemplo de uso de getActions (asegúrate de que getActions esté disponible en tu contexto)
+					// const actions = getActions();
+
+				} catch (error) {
+					console.log("Error:", error);
+					// Aquí podrías mostrar un mensaje de error al usuario o realizar alguna otra acción para manejar el error
+				}
+			},
+
+			test: async () => {
+				try {
+
+					let response = await fetch(apiUrl + "/test")
+					let data = await response.json()
+					alert(data)
+
+				} catch (e) {
+					console.error(e)
 				}
 			}
+
+
+
 
 		}
 	};
