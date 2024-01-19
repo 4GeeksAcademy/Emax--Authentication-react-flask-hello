@@ -2,6 +2,8 @@ const apiUrl = process.env.BACKEND_URL + "/api"
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			loggedUserId: null,
+			currentUser: null,
 			message: null,
 			demo: [
 				{
@@ -69,21 +71,63 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			test: async () => {
+			// test: async () => {
+			// 	try {
+
+			// 		let response = await fetch(apiUrl + "/test")
+			// 		let data = await response.json()
+			// 		alert(data)
+
+			// 	} catch (e) {
+			// 		console.error(e)
+			// 	}
+			// },
+
+			privateRoute: async () => {
 				try {
 
-					let response = await fetch(apiUrl + "/test")
-					let data = await response.json()
-					alert(data)
+					const options = {
+						method: "Get",
+						headers: {
+							Authorization: 'Bearer' + localStorage.getItem("token")
+						}
+					};
+					const response = await fetch(apiUrl + "/private", options)
+					console.log(response)
+					const res = await response.json()
+					console.log(res)
+					if (response.ok) {
+						setStore({ currentUser: res })
+						return null
+					}
+					setStore({ currentUser: false })
 
-				} catch (e) {
-					console.error(e)
+
+				} catch (error) {
+					console.error(error)
+					setStore({ currentUser: false })
+
 				}
-			}
+			},
 
+			logIn: async (newLogIn) => {
+				try {
+					let result = await fetch(apiUrl + "/login", {
+						method: "POST",
+						body: JSON.stringify(newLogIn),
+						headers: {
+							"Content-Type": "application/json"
+						}
+					})
 
-
-
+					const data = await result.json();
+					console.log("respuesta al intentar iniciar sesion:", data);
+					localStorage.setItem({ loggerUserId: data.id });
+					return data;
+				} catch (e) {
+					console.log(e)
+				}
+			},
 		}
 	};
 };

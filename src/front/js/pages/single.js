@@ -9,17 +9,34 @@ export const Single = props => {
 	const params = useParams();
 
 	return (
-		<div className="jumbotron">
-			<h1 className="display-4">This will show the demo element: {store.demo[params.theid].title}</h1>
-			<img src={rigoImageUrl} />
-			<hr className="my-4" />
+		<>
 
-			<Link to="/">
-				<span className="btn btn-primary btn-lg" href="#" role="button">
-					Back home
-				</span>
-			</Link>
-		</div>
+			{store.currentUser ?
+
+
+				<div className="jumbotron">
+					<h1 className="display-4">Si ves a rigo es porque estas logueado </h1>
+					<img src={rigoImageUrl} />
+					<hr className="my-4" />
+				</div>
+
+				:
+
+				<>
+
+					<h2>Logueate para que veas mas contenido</h2>
+
+					<Link to="/">
+
+						<button type="button" className="btn btn-primary">Create una cuenta</button>
+
+					</Link>
+
+				</>
+
+			}
+
+		</>
 	);
 };
 

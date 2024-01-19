@@ -1,7 +1,6 @@
 import React, { useContext, useState, } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 
 
@@ -34,11 +33,11 @@ export const Home = () => {
 				country: country,
 				phone: phone,
 				address: address,
-				//date: date
+				
 			}
 			await actions.sign(newUser)
-			//await actions.test()
-			//navigate("/demo")
+			// await actions.test()
+			navigate("/demo")
 
 		} catch (error) {
 			console.log(error)

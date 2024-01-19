@@ -11,7 +11,7 @@ class User(db.Model):
     country = db.Column(db.String(50), unique=False, nullable=False)
     phone = db.Column(db.String(20), unique=False, nullable=False)
     address = db.Column(db.String(150), unique=False, nullable=False)
-    date = db.Column(db.Date, unique=False, nullable=False)
+    # date = db.Column(db.Date, unique=False, nullable=False)
     
     def __repr__(self):
         return f'<User {self.email}>'
