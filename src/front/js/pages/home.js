@@ -1,6 +1,6 @@
 import React, { useContext, useState, } from "react";
 import { Context } from "../store/appContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/home.css";
 
 
@@ -13,7 +13,6 @@ export const Home = () => {
 	const [country, setCountry] = useState("")
 	const [phone, setPhone] = useState("")
 	const [address, setAddress] = useState("")
-	const [date, setDate] = useState("")
 
 	const navigate = useNavigate()
 
@@ -33,9 +32,10 @@ export const Home = () => {
 				country: country,
 				phone: phone,
 				address: address,
-				
+
 			}
-			await actions.sign(newUser)
+			const result = await actions.sign(newUser)
+			console.log(result)
 			// await actions.test()
 			navigate("/demo")
 
@@ -67,7 +67,7 @@ export const Home = () => {
 
 				<div className="form-container right">
 
-					<h2 className="title-r">Create Account</h2>
+					<h2 className="title-r">Crear cuenta</h2>
 
 					<form className="row g-3 form-r">
 						<div className="col-md-12">
@@ -110,10 +110,13 @@ export const Home = () => {
 							</label>
 						</div>
 						<div className="butons">
-							<div></div>
-							<div className="mb-4">
-								<button type="button" className="btn btn-primary singup" onClick={creatNewUser}>Sign Up</button>
-							</div>
+							
+								<Link to="/demo">
+									<button className="btn btn-primary singup">iniciar sesion</button>
+								</Link>
+
+								<button type="button" className="btn btn-primary singup" onClick={creatNewUser}>Crear cuenta</button>
+		
 						</div>
 					</form>
 

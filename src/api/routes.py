@@ -10,10 +10,11 @@ from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_requir
 # from datetime import datetime
 from flask_bcrypt import Bcrypt
 
+
+
 api = Blueprint('api', __name__)
 bcrypt = Bcrypt()
 jwt = JWTManager
-
 
 CORS(api)
 
@@ -26,7 +27,7 @@ CORS(api)
 # def test():
 #     return jsonify({"msg": "funciona"}), 200
 
-@api.route('/sign', methods=['POST', 'OPTIONS'])
+@api.route('/sign', methods=['POST'])
 def create_one_user():
     try:
 
@@ -38,7 +39,7 @@ def create_one_user():
                 return jsonify({"error": f"El campo '{field}' es requerido y no puede estar vacío"}), 400
             
         raw_password = body.get('password')
-        password_hash = current_app.bcrypt.generate_password_hash(raw_password).decode('utf-8')
+        password_hash = bcrypt.generate_password_hash(raw_password).decode('utf-8')
 
         # date = datetime.strptime(body["date"], "%Y-%m-%d")
     # except (ValueError, KeyError):

@@ -1,5 +1,6 @@
 const apiUrl = process.env.BACKEND_URL + "/api"
 const getState = ({ getStore, getActions, setStore }) => {
+	
 	return {
 		store: {
 			loggedUserId: null,
@@ -43,31 +44,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(newUser);
 
 				try {
-					const response = await fetch(apiUrl + "/sign", {
+					let response = await fetch(apiUrl + "/sign", {
 						method: "POST",
 						body: JSON.stringify(newUser),
 						headers: {
 							"Content-Type": "application/json",
-							'access-control-allow-origin': "*"
 						}
 					});
-
-					if (!response.ok) {
-						throw new Error("Error with the request");
-					}
 
 					const data = await response.json();
 					alert("usuario registrado")
 					console.log("respuesta al intentar un new user:", data);
 
-					// Aquí podrías realizar alguna acción con los datos obtenidos, como actualizar el estado
-
-					// Ejemplo de uso de getActions (asegúrate de que getActions esté disponible en tu contexto)
-					// const actions = getActions();
-
 				} catch (error) {
 					console.log("Error:", error);
-					// Aquí podrías mostrar un mensaje de error al usuario o realizar alguna otra acción para manejar el error
 				}
 			},
 
@@ -89,7 +79,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const options = {
 						method: "Get",
 						headers: {
-							Authorization: 'Bearer' + localStorage.getItem("token")
+							Authorization: 'Bearer ' + localStorage.getItem("token")
+
 						}
 					};
 					const response = await fetch(apiUrl + "/private", options)
@@ -110,6 +101,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			// actions.js
 			logIn: async (newLogIn) => {
 				try {
 					let result = await fetch(apiUrl + "/login", {
@@ -118,16 +110,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 						headers: {
 							"Content-Type": "application/json"
 						}
-					})
+					});
 
 					const data = await result.json();
 					console.log("respuesta al intentar iniciar sesion:", data);
-					localStorage.setItem({ loggerUserId: data.id });
+
+					// Utiliza data.token en lugar de result.access_token
+					localStorage.setItem("token", data.token);
+					setStore({ loggedUserId: data.id });
 					return data;
 				} catch (e) {
-					console.log(e)
+					console.log(e);
 				}
 			},
+
+			logout: async () => {
+				try {
+					const actions = getActions()
+					localStorage.removeItem('token');
+					setStore({ loggedUserId: null });
+					actions.privateRoute()
+					return true;
+				} catch (error) {
+					console.error('Error during logout:', error);
+					return false;
+				}
+			},
+
 		}
 	};
 };

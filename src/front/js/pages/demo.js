@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import Swal from "sweetalert2";
 
 import { Context } from "../store/appContext";
 
@@ -13,7 +12,6 @@ export const Demo = () => {
 
 	const handlerlogInNewUser = async () => {
 		try {
-
 			let newLogIn = {
 				email: email,
 				password: password,
@@ -21,12 +19,14 @@ export const Demo = () => {
 
 			const result = await actions.logIn(newLogIn);
 
-			if (result.access_token) {
-                localStorage.setItem("token", result.access_token);
-                console.log("Usuario logueado:", result.fullName);
-                actions.private();
-				navigate("/single")}
+			console.log("Resultado de actions.logIn:", result); // Agrega este log
 
+			if (result.access_token) {
+				localStorage.setItem("token", result.access_token);
+				console.log("Usuario logueado:", result.fullName);
+				actions.privateRoute();
+				navigate("/");
+			}
 		} catch (e) {
 			console.error(e);
 			setError("An error occurred while logging in");
@@ -36,29 +36,37 @@ export const Demo = () => {
 	return (
 		<div className="container">
 
-			<h2>LOG IN</h2>
+			<div className="right-log">
 
-			<form>
-				<div className="mb-3">
-					<label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-					<input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-				</div>
-				<div className="mb-3">
-					<label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-					<input type="password" className="form-control" id="exampleInputPassword1" />
-				</div>
-				{/* <div className="mb-3 form-check">
+				<h2 className="title-log">Inicia sesion</h2>
+
+				<form>
+					<div className="mb-3">
+						<label htmlFor="exampleInputEmail1" className="form-label">Email address :</label>
+						<input type="email" onChange={(e) => setEmail(e.target.value)} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+					</div>
+					<div className="mb-3">
+						<label htmlFor="exampleInputPassword1" className="form-label">Password :</label>
+						<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control" id="exampleInputPassword1" />
+					</div>
+					{/* <div className="mb-3 form-check">
 					<input type="checkbox" className="form-check-input" id="exampleCheck1" />
 					<label className="form-check-label" htmlFor="exampleCheck1">Keep me Signed in</label>
 				</div> */}
-				{error && <p className="error-message">{error}</p>}
-				<button type="button" onClick={handlerlogInNewUser} className="btn btn-primary">Log in</button>
-			</form>
+					{error && <p className="error-message">{error}</p>}
+				</form>
 
+				<div className="butons">
 
-			<Link to="/">
-				<button className="btn btn-primary">Back home</button>
-			</Link>
+					<button type="button" onClick={handlerlogInNewUser} className="btn btn-primary singup">Iniciar sesion </button>
+
+					<Link to="/home">
+						<button className="btn btn-primary singup">Crear cuenta</button>
+					</Link>
+
+				</div>
+
+			</div>
 		</div>
 	);
 };

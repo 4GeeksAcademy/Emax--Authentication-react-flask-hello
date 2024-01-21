@@ -50,8 +50,13 @@ body {
     color: #1daf88;
 }
 
+.singup {
+    background-color: #1daf88;
+}
+
 .singup:hover {
     background-color: #1daf88;
+    box-shadow: 0px 0px 10px #1daf88;
 }
 
 .butons {
@@ -64,4 +69,65 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.jumbotron {
+    width: 50%;
+    text-align: center;
+    margin: auto;
+    padding: 20px;
+    background-color: #34445b;
+    margin-top: 30px;
+
+}
+
+.jumbotron h2 {
+    font-size: xx-large;
+    color: #1daf88;
+}
+
+.cont-off {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    padding: 20px;
+}
+
+.butons {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px;
+}
+
+.right-log {
+    margin-top: 30px;
+    background-color: #34445b;
+    color: #1daf88;
+    padding: 20px;
+
+}
+
+.right-log h2 {
+    text-align: center;
+}
+
+.dark-bu:hover {
+    box-shadow: 0px 0px 10px #000;
+
+}
+
+.logo {
+    width: 70px;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+.container-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dark-button {
+    margin-right: 20px;
 }
